@@ -62,5 +62,40 @@ public:
         return HeadNull->next;
     }
 };
+
+
+//todo 递归实现
+
+class Solution {
+public:
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        if (head == nullptr || k <= 1) return head;
+        /*
+            * 需要记录当前节点，前一个节点，以及后一个节点
+        */
+        ListNode* pre = nullptr;
+        ListNode* cur = head;
+        ListNode* next = nullptr;
+
+        //? 然后检查当前节点开始，是否有k个节点
+        for (int i = 0; i < k; ++i) {
+            if (cur == nullptr) return head;
+            cur = cur->next;
+        }
+
+        cur = head;
+
+        //? 开始翻转
+        for (int i = 0; i < k; ++i) {
+            next = cur->next;
+            cur->next = pre;
+            pre = cur;
+            cur = next;
+        }
+
+        head->next = reverseKGroup(next, k);
+        return pre;
+    }
+};
 // @lc code=end
 

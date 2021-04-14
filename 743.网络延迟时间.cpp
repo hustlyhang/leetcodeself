@@ -35,6 +35,7 @@ class Solution {
                 }
             }
             if (t == -1) return -1;
+            
             vis[t] = true;
             for (int j = 1; j <= n; j++) {
                 // 访问和t连接的且未被访问的节点，更新距离
