@@ -6,6 +6,7 @@
 
 // @lc code=start
 #include <vector>
+#include <algorithm>
 using  namespace std;
 
 // class Solution {
@@ -31,37 +32,44 @@ using  namespace std;
 //         return ret;
 //     }
 // };
-// class Solution {
-// public:
-//     int jump(vector<int>& nums) {
-//         int curDistance = 0;    // µ±Ç°¸²¸ÇµÄ×îÔ¶¾àÀëÏÂ±ê
-//         int ans = 0;            // ¼ÇÂ¼×ßµÄ×î´ó²½Êı 
-//         int nextDistance = 0;   // ÏÂÒ»²½¸²¸ÇµÄ×îÔ¶¾àÀëÏÂ±ê 
-//         for (int i = 0; i < nums.size() - 1; i++) { // ×¢ÒâÕâÀïÊÇĞ¡ÓÚnums.size() - 1£¬ÕâÊÇ¹Ø¼üËùÔÚ
-//             nextDistance = max(nums[i] + i, nextDistance); // ¸üĞÂÏÂÒ»²½¸²¸ÇµÄ×îÔ¶¾àÀëÏÂ±ê
-//             if (i == curDistance) {                 // Óöµ½µ±Ç°¸²¸ÇµÄ×îÔ¶¾àÀëÏÂ±ê
-//                 curDistance = nextDistance;         // ¸üĞÂµ±Ç°¸²¸ÇµÄ×îÔ¶¾àÀëÏÂ±ê
-//                 ans++;
-//             }
-//         }
-//         return ans;
-//     }
-// };
+
+//todo æ¯æ¬¡ç»´æŠ¤ä¸€ä¸ªå½“å‰ä½ç½®ï¼Œä»¥åŠä¸‹ä¸€ä¸ªèƒ½åˆ°è¾¾çš„æœ€è¿œä½ç½®ï¼Œå½“èµ°åˆ°å½“å‰ä½ç½®æ—¶
+//todo å°±å°†å½“å‰èƒ½èµ°çš„ä½ç½®æ›´æ–°åˆ°ä¸‹ä¸€ä¸ªèƒ½åˆ°è¾¾çš„ä½ç½®ï¼Œæ¯èµ°ä¸€æ­¥éƒ½æ›´æ–°æœ€è¿œä½ç½®
+//todo å½“i == curæ—¶å°±è¯´æ˜éœ€è¦è·³äº†
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int curDistance = 0;    
+        int ans = 0;           
+        int nextDistance = 0;   
+        //? ä¸ºä»€ä¹ˆæ˜¯nums.size() - 1 
+        //! å› ä¸ºå¦‚æœèµ°åˆ°æœ€åä¸€ä¸ªä½ç½®æ—¶ï¼Œå¦‚æœcur == nums.size() - 1æ—¶ï¼Œå°±ä¼šå†æ¬¡æ›´æ–°ansï¼Œç„¶è€Œæ˜¾ç„¶å·²ç»èµ°åˆ°ç»ˆç‚¹ï¼Œæ— éœ€å†è·³äº†
+        for (int i = 0; i < nums.size() - 1; i++) { 
+            nextDistance = max(nums[i] + i, nextDistance);
+            if (i == curDistance) {                
+                curDistance = nextDistance;         
+                ans++;
+                if (curDistance >= nums.size() - 1) break;
+            }
+        }
+        return ans;
+    }
+};
 class Solution {
 public:
     int jump(vector<int>& nums) {
         if (nums.size() == 1) return 0;
-        int curDistance = 0;    // µ±Ç°¸²¸Ç×îÔ¶¾àÀëÏÂ±ê
-        int ans = 0;            // ¼ÇÂ¼×ßµÄ×î´ó²½Êı
-        int nextDistance = 0;   // ÏÂÒ»²½¸²¸Ç×îÔ¶¾àÀëÏÂ±ê
+        int curDistance = 0;    
+        int ans = 0;            
+        int nextDistance = 0;   
         for (int i = 0; i < nums.size(); i++) {
-            nextDistance = max(nums[i] + i, nextDistance);  // ¸üĞÂÏÂÒ»²½¸²¸Ç×îÔ¶¾àÀëÏÂ±ê
-            if (i == curDistance) {                         // Óöµ½µ±Ç°¸²¸Ç×îÔ¶¾àÀëÏÂ±ê
-                if (curDistance != nums.size() - 1) {       // Èç¹ûµ±Ç°¸²¸Ç×îÔ¶¾àÀëÏÂ±ê²»ÊÇÖÕµã
-                    ans++;                                  // ĞèÒª×ßÏÂÒ»²½
-                    curDistance = nextDistance;             // ¸üĞÂµ±Ç°¸²¸Ç×îÔ¶¾àÀëÏÂ±ê£¨Ïàµ±ÓÚ¼ÓÓÍÁË£©
-                    if (nextDistance >= nums.size() - 1) break; // ÏÂÒ»²½µÄ¸²¸Ç·¶Î§ÒÑ¾­¿ÉÒÔ´ïµ½ÖÕµã£¬½áÊøÑ­»·
-                } else break;                               // µ±Ç°¸²¸Ç×îÔ¶¾àÀëÏÂ±êÊÇ¼¯ºÏÖÕµã£¬²»ÓÃ×öans++²Ù×÷ÁË£¬Ö±½Ó½áÊø
+            nextDistance = max(nums[i] + i, nextDistance);  
+            if (i == curDistance) {                         
+                if (curDistance != nums.size() - 1) {       
+                    ans++;                                 
+                    curDistance = nextDistance;            
+                    if (nextDistance >= nums.size() - 1) break; 
+                } else break;                               
             }
         }
         return ans;
