@@ -38,6 +38,8 @@ public:
 class test{
     int ret = 0;
     void quickSort(vector<int>& nums, int k, int l, int r) {
+        int i = rand()%nums.size();
+        swap(nums[l], nums[i]);
         int tmp = nums[l];
         int tl = l, tr = r;
         while (tl < tr) {
