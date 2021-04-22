@@ -13,7 +13,7 @@ using namespace std;
 struct DListNode{
     int key,val,fre;
     DListNode* pre, *next;
-    DListNode(int _key, int _val):key(_key),val(_val),fre(0){};
+    DListNode(int _key, int _val):key(_key),val(_val),fre(1){};
 };
 
 class LFUCache {
@@ -325,7 +325,76 @@ public:
         }
     }
 };
+/**************************************************************************/
 
+struct Node {
+    int key, val;
+    Node* pre, *next;
+    Node(int _key, int _val):key(_key),val(_val){}
+}
+
+class DList{
+  private:
+    int size;
+    Node *head, *tail;
+  public:
+    DList() {
+        head = new Node(1,1);
+        tail = new Node(1,1);
+        head->next = tail;
+        til->pre = head;
+        size = 0;
+    }
+
+    void addtohead(Node* p) {
+        p->next = head->next;
+        head->next->pre = p;
+        head->next = p;
+        p->pre = head;
+        size++;
+    }
+    void remove(Node* p) {
+        p->next->pre = p->pre;
+        p->pre->nex = p->next;
+        delete p;
+        size--;
+    }
+
+    Node* getlast() {
+        return tail->pre;
+    }
+
+    void dellast(){
+        removez(tail->pre);
+    }
+};
+
+
+class LFU{
+  private:
+    int size, capacity;
+    int minfre;
+    map<int, int> keytofre;
+    map<int, Node*> keytonode;
+    map<int, DList*> fretonodes;
+
+  public:
+    LFU(int _capcaity) {
+        capacity = _capcaity;
+        size = 0;
+        minfre = 0;
+    }
+
+    int get(int key) {
+        if (keytonode.count(key) == 0) {
+            return -1;
+        }
+        
+
+    }
+
+
+}
 /**
  * Your LFUCache object will be instantiated and called as such:
  * LFUCache* obj = new LFUCache(capacity);

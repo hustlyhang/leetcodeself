@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <unordered_set>
 using namespace std;
 
 class Solution {
@@ -31,6 +32,24 @@ public:
             }
             // 第 i 到 rk 个字符是一个极长的无重复字符子串
             ans = max(ans, rk - i + 1);
+        }
+        return ans;
+    }
+};
+class Solution1 {
+public:
+    int lengthOfLongestSubstring(string s) {
+        unordered_set<char> us;
+        int ans = 0;
+        int i = 0, j = 0;
+        while (j < s.size()) {
+            while (j < s.size() && us.find(s[j]) == us.end()) {
+                us.insert(s[j]);
+                j++;
+            }
+            ans = max(ans, j - i);
+            us.erase(us.find(s[i]));
+            i++;
         }
         return ans;
     }

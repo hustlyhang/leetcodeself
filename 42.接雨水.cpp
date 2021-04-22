@@ -18,7 +18,7 @@ public:
         int left_max = 0, right_max = 0;
         while (left < right)
         {
-            if (height[left] < height[right])
+            if (height[left] < height[right])  //! 相当于是选择最小的围栏，然后看周围的是不是比最高的低，是的话就加入结果，不是的话就更新最低（表示装不了水）
             {
                 height[left] >= left_max ? (left_max = height[left]) : ans += (left_max - height[left]);
                 ++left;
