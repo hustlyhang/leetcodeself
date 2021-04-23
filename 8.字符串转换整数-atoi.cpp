@@ -49,5 +49,31 @@ public:
         return automaton.sign * automaton.ans;
     }
 };
+
+class Solution {
+public:
+    int myAtoi(string str) {
+        //? 首先清除空格
+        int i = 0;
+        while (str[i] == ' ') i++;
+        int sign = 1;
+        //? 判断正负号
+        if (str[i] == '+' || str[i] == '-') {
+            sign = str[i] == '+' ? 1 : -1;
+            i++;
+        }
+        int ans = 0;
+        while (str[i] >= '0' && str[i] <= '9') {
+            //? 需要先判断是否会溢出
+            //! 这儿只需要判断是否大于7就行了，因为都是判断的正整数
+            if(ans > INT_MAX / 10 || (ans == INT_MAX / 10 && str[i] - '0' > 7))    //4.是否溢出
+                return sign == 1 ? INT_MAX : INT_MIN;
+
+            ans = ans*10 + (str[i] - '0');
+            i++;
+        }
+        return ans * sign;
+    }
+};
 // @lc code=end
 

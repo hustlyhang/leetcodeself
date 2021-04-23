@@ -71,9 +71,10 @@ class Solution {
         //     ret[1] = i - 1;
         // }
         // return ret;
-        if (searchleft(nums, target) == -1) return ret;
+        int l = searchleft(nums, target);
+        if (l == -1) return ret;
         else {
-            ret[0] = searchleft(nums, target);
+            ret[0] = l;
             ret[1] = searchright(nums, target);
         }
         return ret;

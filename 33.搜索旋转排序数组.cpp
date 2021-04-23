@@ -46,8 +46,10 @@ class Solution {
             int mid = (l + r) / 2;
             if (nums[mid] == target)
                 return mid;
+            //! 为什么是等号，不然当l==r时就不能更新了
             if (nums[l] <= nums[mid]) {
-                //! 相当于判断左边是否是有序的，因为严格单调递增 所以和nums[0]比较
+                //! 相当于判断左边是否是有序的，因为严格单调递增
+                //! 所以和nums[0]比较
                 if (nums[l] <= target && target < nums[mid]) {
                     r = mid - 1;
                 } else {
@@ -69,34 +71,33 @@ class Solution {
 };
 
 class practice {
-public:
+  public:
     int s(vector<int> &nums, int target) {
         //! 特殊情况
         int len = nums.size();
-        if (len == 1) return nums[0] == target? 0 : -1;
-        
+        if (len == 1)
+            return nums[0] == target ? 0 : -1;
+
         //! 开始二分查找
         int l = 0, r = len - 1;
         while (l <= r) {
             int mid = (l + r) >> 1;
-            if (nums[mid] == target) return mid;
+            if (nums[mid] == target)
+                return mid;
             else if (nums[mid] > nums[0]) {
                 //! 如果中间不相等的话，就要判断左边还是右边有序，然后再更新l和r
-                if (target>=nums[0] && target < nums[mid]) {
+                if (target >= nums[0] && target < nums[mid]) {
                     //! 如果target在这个范围内，那么就更新r
                     r = mid - 1;
-                }
-                else {
+                } else {
                     //! 如果target不在这个范围内，那么就更新r
                     l = mid + 1;
                 }
-            }
-            else {
+            } else {
                 //! 左边无序，那么右边肯定有序
                 if (target <= nums[len - 1] && target > nums[mid]) {
                     l = mid + 1;
-                }
-                else {
+                } else {
                     r = mid - 1;
                 }
             }

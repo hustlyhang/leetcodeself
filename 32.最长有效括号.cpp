@@ -5,14 +5,14 @@
  */
 
 // @lc code=start
-#include <string>
-#include <stack>
 #include <algorithm>
+#include <stack>
+#include <string>
 #include <vector>
 using namespace std;
 
-class Solution {
-public:
+class Solution1 {
+  public:
     int longestValidParentheses(string s) {
         int maxans = 0;
         stack<int> stk;
@@ -33,8 +33,8 @@ public:
     }
 };
 
-class test{
-public:
+class test {
+  public:
     int longestValidParentheses(string s) {
         stack<int> st;
         //! st用来存放下标
@@ -43,38 +43,40 @@ public:
         for (int i = 0; i < s.size(); ++i) {
             if (s[i] == '(') {
                 st.push(i);
-            }
-            else {
+            } else {
                 st.pop();
                 if (st.empty()) {
                     st.push(i);
-                }
-                else {
+                } else {
                     m = max(m, i - st.top());
                 }
             }
         }
         return m;
-
     }
 };
 class Solution {
-public:
+  public:
     int longestValidParentheses(string s) {
         int len = s.size();
-        if (len <= 1) return 0;
+        if (len <= 1)
+            return 0;
         int m = 0;
         vector<int> dp(len, 0);
         dp[0] = 0;
         for (int i = 1; i < len; ++i) {
-            if (s[i] == '(') dp[i] = 0;
+            if (s[i] == '(')
+                dp[i] = 0;
             else {
                 //! 注意下标越界的情况
-                if (s[i - 1] == '(') dp[i] = i-2 >=0 ? dp[i - 2] + 2 : 2;
+                if (s[i - 1] == '(')
+                    dp[i] = i - 2 >= 0 ? dp[i - 2] + 2 : 2;
                 else {
                     //! 注意下标越界的情况
-                    if (i - dp[i - 1] - 1 >= 0 && s[i - dp[i - 1] - 1] == '(' )  
-                        dp[i] = i - dp[i - 1] - 2 >=0 ? dp[i - 1] + 2 + dp[i - dp[i - 1] - 2] : dp[i - 1] + 2;
+                    if (i - dp[i - 1] - 1 >= 0 && s[i - dp[i - 1] - 1] == '(')
+                        dp[i] = i - dp[i - 1] - 2 >= 0
+                                    ? dp[i - 1] + 2 + dp[i - dp[i - 1] - 2]
+                                    : dp[i - 1] + 2;
                     else {
                         dp[i] = 0;
                     }
@@ -86,4 +88,3 @@ public:
     }
 };
 // @lc code=end
-

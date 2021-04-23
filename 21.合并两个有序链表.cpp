@@ -22,7 +22,7 @@ class Solution {
             return l1 == nullptr ? l2 : l1;
         }
 
-        ListNode* tmp = l1->val <= l2->val ? l1 : l2;
+        ListNode *tmp = l1->val <= l2->val ? l1 : l2;
         tmp->next = mergeTwoLists(tmp->next, tmp == l1 ? l2 : l1);
         return tmp;
     }

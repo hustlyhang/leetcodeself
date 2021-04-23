@@ -5,14 +5,20 @@
  */
 
 // @lc code=start
-#include <vector>
 #include <algorithm>
+#include <vector>
 using namespace std;
+
+/*
+ * 思想：利用数组大小这个信息，将小于0的数字变为大于数组大小，表示这些数字都不可能
+ * 然后遍历数组，将小于n的数字下标处都设置为负数，表示当前位置的数字出现过，最后从头遍历数
+ * 组，找到正数的位置就是缺失的数字
+ */
 class Solution {
-public:
-    int firstMissingPositive(vector<int>& nums) {
+  public:
+    int firstMissingPositive(vector<int> &nums) {
         int n = nums.size();
-        for (int& num: nums) {
+        for (int &num : nums) {
             if (num <= 0) {
                 num = n + 1;
             }
@@ -37,4 +43,3 @@ public:
 };
 
 // @lc code=end
-

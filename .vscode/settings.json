@@ -11,6 +11,7 @@
         "cstdlib": "cpp",
         "map": "cpp",
         "stack": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "xutility": "cpp"
     }
 }

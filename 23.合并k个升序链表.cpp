@@ -7,8 +7,9 @@
 // @lc code=start
 
 //  Definition for singly-linked list.
-#include <vector>
 #include <algorithm>
+#include <queue>
+#include <vector>
 using namespace std;
 
 // struct ListNode
@@ -28,12 +29,12 @@ using namespace std;
 //         ListNode* ret = new ListNode(0);
 //         ListNode* head = ret;
 //         bool flg = true;
-//         while (flg) 
+//         while (flg)
 //         {
 //             int pos = 0;// 记录最大元素位置
 //             int m = INT_MAX;
 //             flg = false;
-//             for (int i = 0; i < lists.size(); ++i) 
+//             for (int i = 0; i < lists.size(); ++i)
 //             {
 //                 if (lists[i] == nullptr) continue;
 //                 //cout<< lists[i]->val<<endl;
@@ -56,27 +57,29 @@ using namespace std;
 // };
 // 也可以用优先级队列来优化寻找过程
 class Solution {
-public:
+  public:
     struct Status {
         int val;
         ListNode *ptr;
-        bool operator < (const Status &rhs) const {
-            return val > rhs.val;
-        }
+        //? 为了让优先队列变为递增类型
+        bool operator<(const Status &rhs) const { return val > rhs.val; }
     };
 
-    priority_queue <Status> q;
+    priority_queue<Status> q;
 
-    ListNode* mergeKLists(vector<ListNode*>& lists) {
-        for (auto node: lists) {
-            if (node) q.push({node->val, node});
+    ListNode *mergeKLists(vector<ListNode *> &lists) {
+        for (auto node : lists) {
+            if (node)
+                q.push({node->val, node});
         }
         ListNode head, *tail = &head;
         while (!q.empty()) {
-            auto f = q.top(); q.pop();
-            tail->next = f.ptr; 
+            auto f = q.top();
+            q.pop();
+            tail->next = f.ptr;
             tail = tail->next;
-            if (f.ptr->next) q.push({f.ptr->next->val, f.ptr->next});
+            if (f.ptr->next)
+                q.push({f.ptr->next->val, f.ptr->next});
         }
         return head.next;
     }

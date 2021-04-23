@@ -18,6 +18,7 @@ public:
         int ret = 100000;
         int tmp = 0;
         while (fst < thr - 1) {
+            thr = nums.size() - 1;
             sec = fst + 1;
             while (sec < thr) {
                 ret = abs(nums[fst] + nums[sec] + nums[thr] - target) > abs (ret - target) ? ret : nums[fst] + nums[sec] + nums[thr];
@@ -29,7 +30,7 @@ public:
                 }
             }
             fst++;
-            thr = nums.size() - 1;
+            
         }
         return ret;
     }

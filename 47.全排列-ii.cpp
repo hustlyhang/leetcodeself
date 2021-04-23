@@ -5,14 +5,15 @@
  */
 
 // @lc code=start
+#include <algorithm>
 #include <vector>
 using namespace std;
 
 class Solution {
-private:
+  private:
     vector<vector<int>> result;
     vector<int> path;
-    void backtracking (vector<int>& nums, vector<bool>& used) {
+    void backtracking(vector<int> &nums, vector<bool> &used) {
         // 此时说明找到了一组
         if (path.size() == nums.size()) {
             result.push_back(path);
@@ -34,8 +35,9 @@ private:
             }
         }
     }
-public:
-    vector<vector<int>> permuteUnique(vector<int>& nums) {
+
+  public:
+    vector<vector<int>> permuteUnique(vector<int> &nums) {
         result.clear();
         path.clear();
         sort(nums.begin(), nums.end()); // 排序
@@ -45,4 +47,3 @@ public:
     }
 };
 // @lc code=end
-

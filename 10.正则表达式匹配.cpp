@@ -85,7 +85,7 @@ public:
                             * dp[i-1][j] 表示匹配n个， 因为s[i-1] == p[j-2] || p[j-2] == '.' ，
                             *   所以将i往前移，看前面还有能匹配p[j - 2] 的没有
                         */
-                        dp[i][j]=dp[i][j-1] || dp[i][j-2] || dp[i-1][j];
+                        dp[i][j]= dp[i][j-1] || dp[i][j-2] || dp[i-1][j];
 
                     }
                 }
@@ -109,8 +109,8 @@ public:
             }
         }
 
-        for(int i = 1; i < len1; ++i) {
-            for(int j = 1; j < len2; ++j) {
+        for(int i = 1; i <= len1; ++i) {
+            for(int j = 1; j <= len2; ++j) {
                 if (s[i - 1] == p[j - 1] || p[j  - 1] == '.') {
                     dp[i][j] = dp[i - 1][j - 1];
                 }

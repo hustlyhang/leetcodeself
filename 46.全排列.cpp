@@ -5,11 +5,11 @@
  */
 
 // @lc code=start
-#include <vector> 
+#include <vector>
 using namespace std;
 
 class Solution {
-public:
+  public:
     vector<vector<int>> ret;
     vector<int> tmp;
     vector<bool> as;
@@ -40,13 +40,13 @@ public:
             }
         }
     }
-    vector<vector<int>> permute(vector<int>& nums) {
-        if (nums.size() == 0) return ret;
+    vector<vector<int>> permute(vector<int> &nums) {
+        if (nums.size() == 0)
+            return ret;
         as.assign(nums.size(), true);
-        // permuteCore(9, nums);
-        premuteCore2(0, nums);
+        permuteCore(0, nums);
+        // premuteCore2(0, nums);
         return ret;
     }
 };
 // @lc code=end
-
