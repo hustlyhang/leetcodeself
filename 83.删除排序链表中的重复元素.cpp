@@ -6,7 +6,7 @@
 
 // @lc code=start
 
- //* Definition for singly-linked list.
+//* Definition for singly-linked list.
 // struct ListNode {
 //     int val;
 //     ListNode *next;
@@ -15,24 +15,27 @@
 //     ListNode(int x, ListNode *next) : val(x), next(next) {}
 // };
 
-class Solution {
+class Solution
+{
 public:
-    ListNode* deleteDuplicates(ListNode* head) {
-        if (head == nullptr) return head;
-        ListNode* tmp = head;
-        ListNode* post = head;
-        while (tmp) {
-            while (post != nullptr && post->val == tmp->val) {
+    ListNode *deleteDuplicates(ListNode *head)
+    {
+        if (head == nullptr)
+            return head;
+        ListNode *tmp = head;
+        ListNode *post = head;
+        while (tmp)
+        {
+            while (post != nullptr && post->val == tmp->val)
+            {
                 post = post->next;
             }
-            if (post == nullptr) tmp->next = nullptr;
-            else {
-                tmp->next = post;
-            }
+
+            tmp->next = post;
+
             tmp = post;
         }
         return head;
     }
 };
 // @lc code=end
-

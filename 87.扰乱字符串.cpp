@@ -6,6 +6,7 @@
 
 // @lc code=start
 #include <string>
+#include <algorithm>
 using namespace std;
 
 // class Solution {

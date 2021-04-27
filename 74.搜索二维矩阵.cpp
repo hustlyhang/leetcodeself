@@ -22,5 +22,45 @@ public:
         return false;
     }
 };
+
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+
+        int j = 0;
+        int l = 0, r = matrix.size() - 1;
+        while (l <= r) {
+            int m = l + ((r - l) >>1);
+            //cout<<"m = "<<m<<endl;
+            if (matrix[m][0] > target) {
+                r = m - 1;
+            }
+            else if (matrix[m][0] < target) l = m + 1;
+            else return true;
+        }
+        if (r == -1) {
+            return false;
+        } 
+        j = r;
+        // cout<<"j = "<<j<<endl;
+        l = 0;
+        r = matrix[j].size() - 1;
+        while (l <= r) {
+            //cout<<"l = "<<l<<endl;
+            //cout<<"r = "<<r<<endl;
+
+            int mid = (l + r)/2;
+            //cout<<"mid = "<<mid<<endl;
+            if (matrix[j][mid] > target) {
+                r = mid - 1;
+            }
+            else if (matrix[j][mid] < target) l = mid + 1;
+            else return true;
+        }
+        if (l == matrix[j].size() || r == -1) return false;
+        //if (matrix[j][r] == target) return true;
+        return false;
+    }
+};
 // @lc code=end
 

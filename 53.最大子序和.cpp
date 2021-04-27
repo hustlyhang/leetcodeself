@@ -9,9 +9,11 @@
 #include <algorithm>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-    int maxSubArray(vector<int>& nums) {
+    int maxSubArray(vector<int> &nums)
+    {
         // int result = INT32_MIN;
         // int count = 0;
         // for (int i = 0; i < nums.size(); i++) {
@@ -23,16 +25,22 @@ public:
         // }
         // return result;
         int n = nums.size();
-        if (n == 1) return nums[0];
-        vector<int> dp(n, 0);
-        int ret = nums[0];
-        dp[0] = nums[0];
-        for (int i = 1; i < n; ++i) {
-            dp[i] = max(dp[i - 1] + nums[i], nums[i]);
+        if (n == 1)
+            return nums[0];
+        vector<int> dp(n + 1, 0);
+        int ret = INT_MIN;
+
+        for (int i = 1; i <= n; ++i)
+        {
+            if (dp[i - 1] >= 0)
+                dp[i] = dp[i - 1] + nums[i - 1];
+            else
+            {
+                dp[i] = nums[i - 1];
+            }
             ret = max(dp[i], ret);
         }
         return ret;
     }
 };
 // @lc code=end
-
