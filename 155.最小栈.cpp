@@ -11,30 +11,43 @@
 using namespace std;
 
 class MinStack {
-    stack<int> x_stack;
-    stack<int> min_stack;
+    stack<long long> x_stack;
+    long long mnum = 0;
 public:
 // 同时将当前元素和最小元素入栈
     MinStack() {
-        min_stack.push(INT_MAX);
+        
     }
     
     void push(int x) {
-        x_stack.push(x);
-        min_stack.push(min(min_stack.top(), x));
+        if (x_stack.empty()) {
+            x_stack.push(0);
+            mnum = x;
+        }
+        else {
+            long long cmpare = x - mnum;
+            if (cmpare < 0) {
+                mnum = x;
+            }
+            x_stack.push(cmpare);
+        }
     }
     
     void pop() {
+        long long tmp = x_stack.top();
         x_stack.pop();
-        min_stack.pop();
+        mnum = tmp > 0 ? mnum : mnum - tmp;
+
     }
     
     int top() {
-        return x_stack.top();
+        long long tmp = x_stack.top();
+        long long prem = tmp > 0 ? mnum : mnum - tmp;
+        return x_stack.top() + prem;
     }
     
     int getMin() {
-        return min_stack.top();
+        return mnum;
     }
 };
 
