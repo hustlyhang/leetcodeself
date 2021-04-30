@@ -39,7 +39,7 @@ public:
                 tmp.pop_back();
                 tmp.pop_back();
             }
-                }
+        }
         else
         {
             // 一位
