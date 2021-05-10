@@ -101,4 +101,21 @@ class Solution {
         return ans;
     }
 };
+
+
+class test{
+    int jump(vector<int> &nums) {
+        int next = 0, cur = 0, ret = 0;
+        int pos = 0;
+        for (int i = 0; i < nums.size() - 1; ++i) {
+            next = max(next, i + nums[i]);
+            if (cur == i) {
+                cur = next;
+                ret++;
+            }
+            if (cur >= nums.size()) break;
+        }
+        return ret;
+    }
+};
 // @lc code=end
