@@ -135,4 +135,56 @@ public:
         return ret;
     }
 };
+
+class test{
+  public:
+    vector<int> findSubstring(string s, vector<string> &words) {
+        vector<int> ret;
+        int len = words.size();
+        if (len == 0) return ret; 
+        int wl = words[0].size();
+        
+        // 利用一个map记录所有的单词出现次数
+        unordered_map<string, int> all;
+        for (auto x : words) all[x]++;
+
+        // 然后还有一个map记录当前的出现次数
+        unordered_map<string, int> cur;
+        
+        // 为了减少分析情况，只需要从一个单词的长度开始分析即可
+        for (int i = 0; i < wl; ++i) {
+            // 然后开始往后分析
+            // 将当前单词添加到临时map中
+            int begin = i, end = i;
+            cur.clear();
+            while (begin + wl * len <= s.size()) {
+                string nowWord = s.substr(end, wl);
+
+                cur[nowWord] ++;
+                end+=wl;
+                if (all.count(nowWord) == 0) {
+                    cur.clear();
+                    begin = end;
+                }
+                else {
+                    if (cur[nowWord] > all[nowWord]) {
+                        while (cur[nowWord] > all[nowWord]) {
+                            cur[s.substr(begin, wl)]--;
+                            begin += wl;
+                        }
+                    }
+                }
+                if (end - begin == wl * len) {
+                    ret.push_back(begin);
+                    cur.clear();
+                    begin+=wl;
+                    end = begin;
+                }
+            }
+             
+        }
+        return ret;
+    }
+
+};
 // @lc code=end

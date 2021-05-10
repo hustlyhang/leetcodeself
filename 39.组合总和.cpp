@@ -17,7 +17,7 @@ private:
             return;
         }
         if (sum == target) {
-            result.push_back(path);
+            result.emplace_back(path);
             return;
         }
 

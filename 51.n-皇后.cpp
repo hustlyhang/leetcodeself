@@ -37,7 +37,7 @@ public:
     }
     void solveNQueensCore(int i, int n) {
         if (i == n) {
-            ret.push_back(tmp);
+            ret.emplace_back(tmp);
             return;
         }
         for (int j = 0; j < n; ++j) {
@@ -64,9 +64,9 @@ public:
                 s.push_back('Q');
                 pos = n - y - 1;
                 while (pos--) s.push_back('.');
-                rettmp.push_back(s);
+                rettmp.emplace_back(s);
             }
-            result.push_back(rettmp);
+            result.emplace_back(rettmp);
         }
         return result;
     }

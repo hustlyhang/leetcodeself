@@ -36,5 +36,32 @@ public:
         return string(s.begin() + left, s.begin() + right + 1);
     }
 };
+
+class test{
+  public:
+    string longestPalindrome(string s) {
+        int begin = 0, end = 0;
+        int len = s.size();
+        vector<vector<bool>> dp(len, vector<bool>(len, true));
+        for (int i = len - 1; i >= 0; i--) {
+            for (int j = i + 1; j < len; ++j) {
+                if (dp[i + 1][j - 1] && s[i] == s[j]) {
+                    dp[i][j] = true;
+                    if (j - i > end - begin) {
+                        end = j;
+                        begin = i;
+                    }
+                }
+                else dp[i][j] = false;
+            }
+        }
+        return s.substr(begin, end - begin + 1);
+    }
+
+
+};
+
+
+
 // @lc code=end
 

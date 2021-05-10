@@ -42,21 +42,10 @@ public:
         string ans;
         while (!ch.empty()) {
             auto str = ch.back();
-            if (str == ".") {
-                ch.pop_back();
-            }
-            else if (str == "..") {
-                ch.pop_back();
-                if (!ch.empty()) {
-                    ch.pop_back();
-                }
-            }
-            else {
-                reverse(str.begin(), str.end());
-                ans+=str;
-                ans.push_back('/');
-                ch.pop_back();
-            }
+            reverse(str.begin(), str.end());
+            ans+=str;
+            ans.push_back('/');
+            ch.pop_back();
         }
         if (ans.size() == 0) return "/";
         reverse(ans.begin(), ans.end());

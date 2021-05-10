@@ -15,7 +15,6 @@ public:
         else {
             return myPowCore(x * x, n / 2);
         }
-
     }
     double myPow(double x, int n) {
         bool sign = 1;

@@ -26,7 +26,7 @@ public:
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
-
+        // 先找到行号，然后在行里面找
         int j = 0;
         int l = 0, r = matrix.size() - 1;
         while (l <= r) {

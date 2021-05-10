@@ -27,4 +27,36 @@ class Solution {
         reverse(nums.begin() + i + 1, nums.end());
     }
 };
+
+
+class test{
+  public:
+    void nextPermutation(vector<int> &nums) {
+        // 从后往前找到那个降低的位置
+        // 然后交换当前位置和后面刚好大于此位置的数字
+        int len = nums.size();
+        if (len == 1) return;
+        int pos = -1;
+        for (int i = len - 1; i > 0; i--) {
+            if (nums[i] > nums[i - 1]) {
+                pos = i - 1;
+                break;
+            }
+        }
+        //cout<<"pos = "<<pos<<endl;
+        if (pos == -1) {
+            reverse(nums.begin(), nums.end());
+            return;
+        }
+        for (int i = len - 1; i >= 0; --i) {
+            if (nums[i] > nums[pos]) {
+                //cout<<"i = "<<i<<endl;
+                swap(nums[pos], nums[i]);
+                break;
+            }
+        }
+        reverse(nums.begin() + pos + 1, nums.end());
+        return;
+    }
+};
 // @lc code=end

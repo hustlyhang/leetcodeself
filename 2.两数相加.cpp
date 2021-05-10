@@ -69,5 +69,29 @@ public:
         }
         return nullptr;
     }
+    ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
+    {
+        ListNode* ret = new ListNode(0);
+        ListNode* cur = ret;
+        int carry = 0, sum = 0;
+        while (l1 || l2) {
+            sum = 0;
+            sum += (l1 == nullptr ? 0 : l1->val);
+            sum += (l2 == nullptr ? 0 : l2->val);
+            
+            cur->next = new ListNode(0);
+            cur = cur->next;
+            cur->val = (sum + carry) % 10;
+            carry = (sum + carry) / 10;
+            if (l1) l1 = l1->next;
+            if (l2) l2 = l2->next;
+        }
+        if (carry) {
+            cur->next = new ListNode(0);
+            cur = cur->next;
+            cur->val = carry;
+        }
+        return ret->next;
+    }
 };
 // @lc code=end

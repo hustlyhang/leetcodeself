@@ -16,7 +16,7 @@ class Solution {
     void backtracking(vector<int> &candidates, int target, int sum,
                       int startIndex, vector<bool> &used) {
         if (sum == target) {
-            result.push_back(path);
+            result.emplace_back(path);
             return;
         }
         for (int i = startIndex;

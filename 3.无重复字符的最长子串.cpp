@@ -54,5 +54,28 @@ public:
         return ans;
     }
 };
+
+class test{
+    int lengthOfLongestSubstring(string s) {
+        // 双指针
+        int ret = 0;
+        int l = 0, r = 0;
+        unordered_set<char> us;
+        while (r < s.size()) {
+            while (r < s.size() && us.count(s[r]) == 0) {
+                us.insert(s[r]);
+                r++;
+            }
+            ret = max(ret, r - l);
+            while (l <= r && us.count(s[r])) {
+                us.erase(s[l]);
+                l++;
+            }
+        }
+        return ret;
+    }
+
+
+};
 // @lc code=end
 

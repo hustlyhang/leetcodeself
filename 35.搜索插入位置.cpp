@@ -15,6 +15,7 @@ using namespace std;
 #include <vector>
 using namespace std;
 
+// 找第一个比target大的元素的位置，就是l
 class Solution {
   public:
     int searchInsert(vector<int> &nums, int target) {

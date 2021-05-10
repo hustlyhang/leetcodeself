@@ -10,7 +10,7 @@
 #include <iostream>
 using namespace std;
 
-class Solution
+class Solution1
 {
 public:
     vector<int> flg;
@@ -54,7 +54,7 @@ public:
     }
 };
 
-class Solution1
+class Solution
 {
 public:
     string getPermutation(int n, int k)
@@ -73,9 +73,8 @@ public:
         }
 
         string ans;
-        while (t)
+        while (t--)
         {
-            t = t - 1;
             ans += ('0' + nums[(m - 1) / tt[t]]);
             int mmm = m;
             //! 每次更新m是减去前面的，而不是取余

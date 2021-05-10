@@ -48,9 +48,26 @@ bool isValid(int row, int col, char val, vector<vector<char>>& board) {
     }
     return true;
 }
+    bool dfs(vector<vector<char>>& board) {
+        for (int i = 0; i < board.size(); ++i) {
+            for (int j = 0; j < board[0].size(); ++j) {
+                if (board[i][j] != '.') continue;
+
+                    for (int k = '1'; k <= '9'; ++k) {
+                        if (isValid(i, j, k, board)){
+                            board[i][j] = k;
+                            if (dfs(board)) return true;
+                            board[i][j] = '.';
+                        }
+                    }
+                    return false;
+            }
+        }
+        return true;
+    }
 public:
     void solveSudoku(vector<vector<char>>& board) {
-        backtracking(board);
+        dfs(board);
     }
 };
 // @lc code=end

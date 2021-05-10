@@ -89,14 +89,25 @@ class Solution {
             return res > INT_MAX ? INT_MAX : res;
         return -res;
     }
-    long div(long a, long b) { // 似乎精髓和难点就在于下面这几句
-        if (a < b)
-            return 0;
+    // long div(long a, long b) { // 似乎精髓和难点就在于下面这几句
+    //     if (a < b)
+    //         return 0;
+    //     long count = 1;
+    //     long tb = b; // 在后面的代码中不更新b
+    //     while ((tb + tb) <= a) {
+    //         count = count + count; // 最小解翻倍
+    //         tb = tb + tb;          // 当前测试的值也翻倍
+    //     }
+    //     return count + div(a - tb, b);
+    // }
+
+    long div(long a, long b) {
+        if (a < b) return 0;
+        long tb = b;
         long count = 1;
-        long tb = b; // 在后面的代码中不更新b
-        while ((tb + tb) <= a) {
-            count = count + count; // 最小解翻倍
-            tb = tb + tb;          // 当前测试的值也翻倍
+        while ((tb<<1) <= a) {
+            count<<=1;
+            tb<<=1;
         }
         return count + div(a - tb, b);
     }

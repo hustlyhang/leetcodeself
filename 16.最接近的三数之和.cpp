@@ -9,31 +9,37 @@
 #include <algorithm>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-    int threeSumClosest(vector<int>& nums, int target) {
+    int threeSumClosest(vector<int> &nums, int target)
+    {
         //! 定一移二
         sort(nums.begin(), nums.end());
         int fst = 0, sec = 0, thr = nums.size() - 1;
         int ret = 100000;
         int tmp = 0;
-        while (fst < thr - 1) {
+        while (fst < thr - 1)
+        {
             thr = nums.size() - 1;
             sec = fst + 1;
-            while (sec < thr) {
-                ret = abs(nums[fst] + nums[sec] + nums[thr] - target) > abs (ret - target) ? ret : nums[fst] + nums[sec] + nums[thr];
-                if (nums[fst] + nums[sec] + nums[thr] <= target) {
+            while (sec < thr)
+            {
+                ret = abs(nums[fst] + nums[sec] + nums[thr] - target) > abs(ret - target) ? ret : nums[fst] + nums[sec] + nums[thr];
+                if (nums[fst] + nums[sec] + nums[thr] < target)
+                {
                     sec++;
                 }
-                else {
+                else if (nums[fst] + nums[sec] + nums[thr] > target)
+                {
                     thr--;
                 }
+                else
+                    break;
             }
             fst++;
-            
         }
         return ret;
     }
 };
 // @lc code=end
-

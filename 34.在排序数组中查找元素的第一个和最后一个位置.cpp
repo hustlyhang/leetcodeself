@@ -56,21 +56,6 @@ class Solution {
     vector<int> searchRange(vector<int> &nums, int target) {
         int m = bsearch(nums, target);
         vector<int> ret(2, -1);
-        // if (m == -1)
-        //     return ret;
-        // else {
-        //     int i = m;
-        //     while (i >= 0 && nums[i] == target) {
-        //         i--;
-        //     }
-        //     ret[0] = i + 1;
-        //     i = m;
-        //     while (i < nums.size() && nums[i] == target) {
-        //         i++;
-        //     }
-        //     ret[1] = i - 1;
-        // }
-        // return ret;
         int l = searchleft(nums, target);
         if (l == -1) return ret;
         else {
