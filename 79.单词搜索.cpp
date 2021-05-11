@@ -49,5 +49,36 @@ public:
         return false;
     }
 };
+class test {
+public:
+    vector<vector<bool>> flg;
+    vector<int> x{1,-1,0,0}, y{0,0,1,-1};
+    bool dfs(vector<vector<char>>& board, int i, int j, int index, string& word) {
+        if (board[i][j] != word[index]) return false;
+        if (index == word.size() - 1) return true;
+        for (int k = 0; k < 4; ++k) {
+            int ti = i + x[k], tj = j + y[k];
+            if (ti >= 0 && ti < board.size() && tj >= 0 && tj < board[0].size() && flg[ti][tj]) {
+                flg[ti][tj] = false;
+                if (dfs(board, ti, tj, index + 1, word)) return true;
+                flg[ti][tj] = true;
+            }
+        }
+        return false;
+    }
+    bool exist(vector<vector<char>>& board, string word) {
+        flg.assign(board.size(), vector<bool>(board[0].size(), true));
+        for (int i = 0; i< board.size(); ++i) {
+            for (int j = 0; j < board[0].size(); ++j) {
+                if (board[i][j] == word[0])
+                {   flg[i][j] = false;
+                    if (dfs(board, i, j, 0, word)) return true;
+                    flg[i][j] = true;
+                }
+            }
+        }
+        return false;
+    }
+};
 // @lc code=end
 

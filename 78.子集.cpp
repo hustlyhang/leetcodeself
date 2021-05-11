@@ -9,7 +9,7 @@
 #include <string>
 using namespace std;
 
-class Solution {
+class Solution1 {
 public:
     vector<vector<int>> ret;
     vector<int> tmp;
@@ -42,7 +42,8 @@ public:
         if (i == nums.size()) {
             ret.push_back(tmp);
             return;
-        }    
+        }
+        if (i > nums.size()) return;
         tmp.push_back(nums[i]);
         subsetsCore(i + 1, nums);
         tmp.pop_back();

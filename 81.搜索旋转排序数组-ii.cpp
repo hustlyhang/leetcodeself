@@ -46,6 +46,9 @@ public:
     }
 };
 
+
+
+// 和I的区别在于判断时需要多判断一下，两边l和r的数字和m的值是不是相等，相等的话就要将两边缩短
 class practice {
 public:
     bool search(vector<int> &nums, int target) {
@@ -66,8 +69,9 @@ public:
                 //! 所以可以将两边都缩小
                 l++;
                 r--;
+                
             } else if (nums[m] >= nums[l]) {
-                //! 左边有序
+                //! 左边有序， 注意m的比较，是大于等于
                 if (target >= nums[l] && target < nums[m]) {
                     r = m - 1;
                 }else {

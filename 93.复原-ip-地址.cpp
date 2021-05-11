@@ -14,7 +14,7 @@ class Solution
 public:
     vector<string> ret;
     string tmp;
-    void restoreIpAddressesCore(int i, int count, string s)
+    void restoreIpAddressesCore(int i, int count, string &s)
     {
         if (i == s.length() && count == 4)
         {
@@ -25,6 +25,7 @@ public:
             return;
         if (4 - count > s.length() - i)
             return;
+        // 分为等于0和不等于0来处理，等于0时只能这一位为一个，所以得单独处理
         if (s[i] == '0')
         {
             if (count == 0)
