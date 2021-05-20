@@ -38,7 +38,7 @@ class Solution {
         int n = nums.size();
         Myqueue qu;
         vector<int> result;
-        //首先将k个元素入队列
+        //首先将k - 1个元素入队列
         for (int i = 0; i < n; ++i) {
             if (i < k - 1) {
                 qu.push(nums[i]);
